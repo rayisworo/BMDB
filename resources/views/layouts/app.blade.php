@@ -24,7 +24,7 @@
         <nav class="navbar navbar-expand-md navbar-dark bg-dark shadow-sm">
             <div class="container-fluid">
                 <a class="navbar-brand text-warning" href="{{ url('/') }}">
-                    BMDB
+                   BMDB
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -45,8 +45,16 @@
                                     <a class="nav-link" href="/">Inbox</a>
                                 </li>
                             @elseif (Auth::user()->role = 'admin')
-                                <li class="nav-item">
-                                    <a class="nav-link" href="/">Manage</a>
+                                <li class="nav-item dropdown">
+                                    <a href="#" class="nav-link dropdown-toggle" id="navbardrop"
+                                        data-toggle="dropdown">Manage</a>
+                                    <div class="dropdown-menu">
+                                        <a href="#" class="dropdown-item">User</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a href="#" class="dropdown-item">Movie</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a href="#" class="dropdown-item">Genre</a>
+                                    </div>
                                 </li>
                             @endif
                         @endauth
@@ -68,22 +76,21 @@
                                 </li>
                             @endif
                         @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" role="button">
+                                    {{-- {{ Auth::user()->name }} <span class="caret"></span> --}}
+                                    Profile
                                 </a>
-
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('logout') }}"
+                                   onclick="event.preventDefault();
+                                                 document.getElementById('logout-form').submit();">
+                                    {{ __('Logout') }}
+                                </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
                             </li>
                         @endguest
                     </ul>

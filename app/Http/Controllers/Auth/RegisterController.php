@@ -49,9 +49,13 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
+            'fullname' => ['required', 'string', 'max:100'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'image' => ['required'],
+            'gender' => ['required'],
+            'address' => ['required'],
+            'dob ' => ['required'],
         ]);
     }
 
@@ -63,10 +67,28 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
+        try {
+            $user =  User::create([
+                'fullname' => $data['fullname'],
+                'role' => 'member',
+                'email' => $data['email'],
+                'password' => Hash::make($data['password']),
+                'gender' => $data['gender'],
+                'address' => $data['address'],
+                'dob' => $data['dob'],
+            ]);
+    
+            $extension = $data['image']->file('profile_picture')->getClientOriginalExtension();
+            $file_name = $user->fullname.$user->user_id . '.' . $extension;
+            $data['image']->file('profilePicture')->move('img/profile/', $file_name);
+            $user->profile_picture = $file_name;
+            $user->save();
+            return $user;
+            //code...
+        } catch (Exception $e) {
+            //throw $th;
+            report($e);
+            return false;
+        }
     }
 }
