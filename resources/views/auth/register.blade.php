@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('Register') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
+                    <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
                         @csrf
 
                         <div class="form-group row">
@@ -53,7 +53,7 @@
                                     <label for="male" class="custom-control-label">Laki-laki</label>
                                 </div>
                                 <div class="custom-control custom-radio custom-control-inline">
-                                    <input class="custom-control-input" type="radio" id="female">
+                                    <input class="custom-control-input" type="radio" id="female" name="gender">
                                     <label for="female" class="custom-control-label">Perempuan</label>
                                 </div>
                             </div>
@@ -67,11 +67,13 @@
                             <div class="col-md-12"> 
                                 <input type="date" data-provide="datepicker" class="form-control" name="dob" id="dob" required>
                             </div>
-                        </div>
+                        </div>                        
                         <div class="form-group row">
-                            <div centered class="col-md-11">
-                                <input type="file" name="image" id="image" class="custom-file-input form-control {{ $errors->has('image') ? 'is-invalid' : '' }}" required>
-                                <label class="custom-file-label" for="image" class="custom-file-label">Choose File</label>
+                            <div class="col-md-12">
+                                <div class="custom-file">
+                                    <input type="file" name="image" accept="image/*" id="image" class="custom-file-input form-control {{ $errors->has('image') ? 'is-invalid' : '' }}" required onchange="changeName(this);">
+                                    <label for="image" class="custom-file-label filename" id="custom-file-label">{{__('Choose File')}}</label>
+                                </div>
                                 @error('image')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -93,4 +95,16 @@
         </div>
     </div>
 </div>
+
+<script >
+    function changeName(obj){
+        var name = obj.value;
+        var idx = name.lastIndexOf("\\");
+        $(".filename").html(name.substr(idx+1, name.length-idx));
+    }
+</script>
+@endsection
+
+@section('extra-js')
+
 @endsection

@@ -6,6 +6,8 @@ use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\File;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
 class RegisterController extends Controller
@@ -51,11 +53,11 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'fullname' => ['required', 'string', 'max:100'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'image' => ['required'],
-            'gender' => ['required'],
-            'address' => ['required'],
-            'dob ' => ['required'],
+            'password' => ['required', 'string', 'min:8', 'confirmed', 'alpha_num'],
+            'image',
+            'gender',
+            'address',
+            'dob ' => ['date'],
         ]);
     }
 
@@ -67,28 +69,35 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        try {
-            $user =  User::create([
-                'fullname' => $data['fullname'],
-                'role' => 'member',
-                'email' => $data['email'],
-                'password' => Hash::make($data['password']),
-                'gender' => $data['gender'],
-                'address' => $data['address'],
-                'dob' => $data['dob'],
-            ]);
-    
-            $extension = $data['image']->file('profile_picture')->getClientOriginalExtension();
-            $file_name = $user->fullname.$user->user_id . '.' . $extension;
-            $data['image']->file('profilePicture')->move('img/profile/', $file_name);
-            $user->profile_picture = $file_name;
-            $user->save();
-            return $user;
-            //code...
-        } catch (Exception $e) {
-            //throw $th;
-            report($e);
-            return false;
+        $request = Request();
+        // dd($request->hasFile('image'));
+
+        $user =  User::create([
+            'fullname' => $data['fullname'],
+            'role' => 'member',
+            'email' => $data['email'],
+            'password' => Hash::make($data['password']),
+            'gender' => $data['gender'],
+            'address' => $data['address'],
+            'dob' => $data['dob'],
+        ]);
+
+        $extension = $request->file('image')->getClientOriginalExtension(); 
+        $name = $user->fullname;
+        $names = explode(" ",strtoupper($name));
+        $inisial = "";
+        foreach($names as $n){
+            $inisial .=$n[0];
         }
+        $create_path = public_path('img/profile/');
+        if(!File::isDirectory($create_path)){
+            File::makeDirectory($create_path, 0777, true, true);
+        }
+        $file_name = 'pp'.$inisial.$user->user_id.'.'.$extension;
+        $img = Image::make($request->file('image')->getRealPath());
+        $img->save('img/profile/'.$file_name, 80);
+        $user->profilePicture = $file_name;
+        $user->save();
+        return $user;
     }
 }
