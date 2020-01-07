@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\User;
+use Carbon\carbon;
 
 class UsersTableSeeder extends Seeder
 {
@@ -19,5 +20,16 @@ class UsersTableSeeder extends Seeder
             'password' => bcrypt('123123123'),
             'role' => 'admin',
         ]);
+        for($i=0; $i<10; $i++){
+            User::create([
+                'fullname' => 'user'.$i,
+                'email' => 'user'.$i.'@bmdb.id',
+                'password'=> bcrypt('123123123'),
+                'gender' => 'male',
+                'address' => 'address user'.$i,
+                'dob' => Carbon::create('1212','12','12'),
+                'profilePicture' => 'ppR2.png',
+            ]);
+        }
     }
 }

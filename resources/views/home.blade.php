@@ -11,7 +11,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                @foreach ($films as $film)
+                {{-- @foreach ($films as $film)
                 <div class="card">
                     <div class="row no-gutters">
                         <div class="col">
@@ -26,14 +26,14 @@
                         </div>
                     </div>
                 </div>
-                @endforeach
+                @endforeach --}}
 
             </div>
         </div>
     </div>
 </div>
 
-{{$films->links()}}
+{{-- {{$films->links()}} --}}
 
 @endsection
 @section('footer')

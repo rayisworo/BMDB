@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
+
 
 class ProfileController extends Controller
 {
@@ -63,6 +66,11 @@ class ProfileController extends Controller
     public function edit($id)
     {
         //
+        $user = User::find($id);
+        // dd("berhasil");
+        return view('editProfile')->with([
+            'user'=>$user,
+        ]);
     }
 
     /**
@@ -75,6 +83,20 @@ class ProfileController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $user = User::find($id);
+        // dd($user->user_id);  
+        $this->validate($request, [
+            'fullname' => ['required', 'string', 'max:100'],
+            'email' => ['required', 'string', 'email', 'max:255',Rule::unique('users','user_id')->ignore($user->id),],
+            'password' => ['required', 'string', 'min:6', 'confirmed', 'alpha_num'],
+            'image' => ['required','mimes:jpeg,png,jpg'],
+            'gender' => ['required'],
+            'address' => ['required'],
+            'dob ' => ['date'],
+        ]);
+        
+        return view('home');
+
     }
 
     /**

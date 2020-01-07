@@ -21,3 +21,5 @@ Route::get('/', 'HomeController@index')->name('home');
 
 //profiles
 Route::get('/profile','ProfileController@index')->name('profile');
+Route::get('/profile/edit/{id}','ProfileController@edit')->name('profileEdit');
+Route::post('/profile/update/{id}','ProfileController@update')->name('profileUpdate');
