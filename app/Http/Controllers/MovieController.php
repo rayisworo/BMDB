@@ -3,12 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\User;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\Rule;
+use App\Movie;
 
-
-class ProfileController extends Controller
+class MovieController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,10 +15,9 @@ class ProfileController extends Controller
     public function index()
     {
         //
-        $users = User::paginate(10);
-        // dd("berhasil");
-        return view('ProfilesPage')->with([
-            'users' => $users,
+        $movies = Movie::paginate(10);
+        return view('home')->with([
+            'movies' => $movies,
         ]);
     }
 
@@ -66,11 +62,6 @@ class ProfileController extends Controller
     public function edit($id)
     {
         //
-        $user = User::find($id);
-        // dd("berhasil");
-        return view('editProfile')->with([
-            'user'=>$user,
-        ]);
     }
 
     /**
@@ -83,23 +74,6 @@ class ProfileController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $user = User::find($id);
-        // dd($user->user_id);  
-        $this->validate($request, [
-            'fullname' => ['required', 'string', 'max:100'],
-            'email' => ['required', 'string', 'email', 'max:255',Rule::unique('users','user_id')->ignore($user->id),],
-            'password' => ['required', 'string', 'min:6', 'confirmed', 'alpha_num'],
-            'image' => ['required','mimes:jpeg,png,jpg'],
-            'gender' => ['required'],
-            'address' => ['required'],
-            'dob ' => ['date'],
-        ]);
-
-        $user->update($request->all());
-        // $user->save();
-        
-        return view('editProfile');
-
     }
 
     /**

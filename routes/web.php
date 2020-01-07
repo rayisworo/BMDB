@@ -17,7 +17,7 @@
 
 Auth::routes();
 
-Route::get('/', 'HomeController@index')->name('home');
+Route::get('/', 'MovieController@index')->name('home');
 
 //profiles
 Route::get('/profile','ProfileController@index')->name('profile');
