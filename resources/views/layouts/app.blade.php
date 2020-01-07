@@ -77,7 +77,7 @@
                             @endif
                         @else
                             <li class="nav-item">
-                                <a class="nav-link" href="#" role="button">
+                                <a class="nav-link" href="{{route('profile')}}" role="button">
                                     {{-- {{ Auth::user()->name }} <span class="caret"></span> --}}
                                     Profile
                                 </a>
