@@ -14,10 +14,13 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         User::create([
-            'fullname' => 'Admin',
-            'email' => 'Admin@bmdb.id',
-            // 'username' => 'admin',
+            'fullname' => 'admin',
+            'email' => 'admin@bmdb.id',
             'password' => bcrypt('123123123'),
+            'gender' => 'male',
+            'address' => 'address admin',
+            'dob' => Carbon::create('1212','12','12'),
+            'profilePicture' => 'ppR2.png',
             'role' => 'admin',
         ]);
         for($i=0; $i<10; $i++){
@@ -29,6 +32,7 @@ class UsersTableSeeder extends Seeder
                 'address' => 'address user'.$i,
                 'dob' => Carbon::create('1212','12','12'),
                 'profilePicture' => 'ppR2.png',
+                'role' => 'member'
             ]);
         }
     }

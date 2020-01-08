@@ -49,11 +49,11 @@
                                     <a  class="nav-link dropdown-toggle" id="navbardrop"
                                         data-toggle="dropdown">Manage</a>
                                     <div class="dropdown-menu">
-                                        <a href="#" class="dropdown-item">User</a>
+                                        <a href="{{ route('manageUsers') }}" class="dropdown-item">User</a>
                                         <div class="dropdown-divider"></div>
                                         <a href="{{ route('manageMovies') }}" class="dropdown-item">Movie</a>
                                         <div class="dropdown-divider"></div>
-                                        <a href="#" class="dropdown-item">Genre</a>
+                                        <a href="{{ route('manageGenres')}}" class="dropdown-item">Genre</a>
                                     </div>
                                 </li>
                             @endif

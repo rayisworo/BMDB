@@ -23,6 +23,12 @@ Route::get('/', 'MovieController@index')->name('home');
 Route::get('/profile','ProfileController@index')->name('profile');
 Route::get('/profile/edit/{id}','ProfileController@edit')->name('profileEdit');
 Route::post('/profile/update/{id}','ProfileController@update')->name('profileUpdate');
+Route::get('/users','ProfileController@manageUsers')->name('manageUsers');
+Route::get('/users/add','ProfileController@create')->name('addUser');
+Route::post('/users/store','ProfileController@store')->name('storeUser');
+Route::get('/users/edit/{id}','ProfileController@editUser')->name('editUser');
+Route::post('/users/update/{id}','ProfileController@updateUser')->name('updateUser');
+Route::get('/users/delete/{id}','ProfileController@destroy')->name('deleteUser');
 
 //movies
 Route::get('/movie','MovieController@manage')->name('manageMovies');
@@ -36,3 +42,11 @@ Route::get('/movie/{id}','MovieController@view')->name('viewMovie');
 //comment
 Route::post('/comment/{id}','CommentController@store')->name('storeComment');
 Route::get('/comment/{id}/delete','CommentController@destroy')->name('deleteComment');
+
+//genre
+Route::get('/genre', 'GenreController@index')->name('manageGenres');
+Route::get('/genre/add', 'GenreController@create')->name('addGenre'); 
+Route::post('/genre/store', 'GenreController@store')->name('storeGenre');
+Route::get('/genre/edit/{id}','GenreController@edit')->name('editGenre');
+Route::post('/genre/update/{id}','GenreController@update')->name('updateGenre'); 
+Route::get('/genre/delete/{id}','GenreController@destroy')->name('deleteGenre');
