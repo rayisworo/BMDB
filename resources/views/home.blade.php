@@ -4,6 +4,14 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
+            <form action="/home">
+                {{-- <i class="fas fa-search" aria-hidden="true"></i> --}}
+                <input class="form-control" type="text" placeholder="Search by Movie title or genre" name="search">
+            </form>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-md-12">
             <div class="card">
                 <div class="card-body p-0">
                     <table class="table table-striped projects">
@@ -13,12 +21,12 @@
                                 <td>
                                     <div class="row">
                                         <div class="col-md-4">
-                                            <img src="{{asset('img/profile/'.$movie->image)}}" class="img-fluid mx-auto d-block">
+                                            <img src="{{asset('img/movie/'.$movie->image)}}" class="img-fluid mx-auto d-block">
                                         </div>
                                         <div class="row">
                                             <div class="col-md-12">
-                                                <h3>{{$movie->title}}</h3>
-                                                <p>{{$movie->genre_id}}</p>
+                                                <a href="{{ route('viewMovie',$movie->movie_id)}}"><h3>{{$movie->title}}</h3></a>
+                                                <p>{{$movie->genre->name}}</p>
                                                 <p>{{$movie->description}}</p>
                                                 <p>{{$movie->rating}}</p>
                                             </div>

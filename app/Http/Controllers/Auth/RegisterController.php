@@ -81,7 +81,7 @@ class RegisterController extends Controller
             'address' => $data['address'],
             'dob' => $data['dob'],
         ]);
-
+            //save profile picture
         $extension = $request->file('image')->getClientOriginalExtension(); 
         $name = $user->fullname;
         $names = explode(" ",strtoupper($name));

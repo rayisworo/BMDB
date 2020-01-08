@@ -46,12 +46,12 @@
                                 </li>
                             @elseif (Auth::user()->role = 'admin')
                                 <li class="nav-item dropdown">
-                                    <a href="#" class="nav-link dropdown-toggle" id="navbardrop"
+                                    <a  class="nav-link dropdown-toggle" id="navbardrop"
                                         data-toggle="dropdown">Manage</a>
                                     <div class="dropdown-menu">
                                         <a href="#" class="dropdown-item">User</a>
                                         <div class="dropdown-divider"></div>
-                                        <a href="#" class="dropdown-item">Movie</a>
+                                        <a href="{{ route('manageMovies') }}" class="dropdown-item">Movie</a>
                                         <div class="dropdown-divider"></div>
                                         <a href="#" class="dropdown-item">Genre</a>
                                     </div>

@@ -23,3 +23,16 @@ Route::get('/', 'MovieController@index')->name('home');
 Route::get('/profile','ProfileController@index')->name('profile');
 Route::get('/profile/edit/{id}','ProfileController@edit')->name('profileEdit');
 Route::post('/profile/update/{id}','ProfileController@update')->name('profileUpdate');
+
+//movies
+Route::get('/movie','MovieController@manage')->name('manageMovies');
+Route::get('/movie/add','MovieController@create')->name('addMovie');
+Route::post('/movie/store','MovieController@store')->name('storeMovie');
+Route::get('/movie/edit/{id}','MovieController@edit')->name('editMovie');
+Route::post('/movie/update/{id}','MovieController@update')->name('updateMovie');
+Route::get('/movie/delete/{id}','MovieController@destroy')->name('deleteMovie');
+Route::get('/movie/{id}','MovieController@view')->name('viewMovie');
+
+//comment
+Route::post('/comment/{id}','CommentController@store')->name('storeComment');
+Route::get('/comment/{id}/delete','CommentController@destroy')->name('deleteComment');
