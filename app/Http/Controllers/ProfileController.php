@@ -75,6 +75,7 @@ class ProfileController extends Controller
             'gender' => $request->get('gender'),
             'address' => $request->get('address'),
             'dob' => $request->get('dob'),
+            'saves' => ", ,"
         ]);
             //save profile picture
         $extension = $request->file('image')->getClientOriginalExtension(); 

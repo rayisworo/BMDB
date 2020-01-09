@@ -4,9 +4,15 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
-            <form action="/home">
-                {{-- <i class="fas fa-search" aria-hidden="true"></i> --}}
-                <input class="form-control" type="text" placeholder="Search by Movie title or genre" name="search">
+            <form class="formControl">
+                <div class="input-group mb-3 d-flex flex-wrap ">
+                  <input placeholder="Search by Movie Title or Genre" type="text" class="form-control" name="search" id="search">
+                  <div class="input-group-append">
+                      <button class="btn btn-secondary input-group-text" type="submit">
+                          Search
+                      </button>
+                  </div>
+                </div>
             </form>
         </div>
     </div>
@@ -34,15 +40,17 @@
                                         <div class="col-md-1"></div>
                                         <div class="row">
                                             <div class="col-md-12">
-                                                {{-- @if(Auth::user()->user_id == $user->user_id) --}}
-                                                    <form action="#" method="get" style="display: inline-block;"> 
+                                                @forelse ($saves as $save)
+                                                    
+                                                @empty
+                                                    <form action="{{ route('saveMovie',$movie->movie_id)}}" method="get" style="display: inline-block;"> 
                                                         @csrf
 
                                                         <button type="submit" class="btn btn-success btn-flat btn-edit">
                                                             Saved
                                                         </button>
-                                                    </form>                                       
-                                                {{-- @endif --}}
+                                                    </form> 
+                                                @endforelse
                                             </div>
                                         </div>
                                     </div>

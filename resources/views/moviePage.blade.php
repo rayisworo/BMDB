@@ -54,7 +54,7 @@
                                                         @if (Auth::user()->user_id == $comment->user->user_id)
                                                             <a href="{{ route('profileEdit',$comment->user->user_id)}}"><h3>{{$comment->user->fullname}}</h3></a>
                                                         @else
-                                                            <a href="#"><h3>{{$comment->user->fullname}}</h3></a>
+                                                            <a href="{{ route('createMessage',$comment->user->user_id)}}"><h3>{{$comment->user->fullname}}</h3></a>
                                                         @endif 
                                                     @endguest
                                                     <p>Comment at {{$comment->created_at}}</p>
@@ -98,7 +98,7 @@
                                     <div class="row">
                                         <tr>
                                             <td>
-                                                <form action="{{ route('storeComment',$comment->movie->movie_id)}}" method="post">
+                                                <form action="{{ route('storeComment',$movie->movie_id)}}" method="post">
                                                     @csrf
                                                     <textarea name="comment" id="comment" class="form-control" cols="30" rows="10" placeholder="Comment here" required></textarea>
                                                     <button type="submit">Comment</button>

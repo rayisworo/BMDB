@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration
             $table->date('dob')->nullable();
             $table->string('profilePicture')->nullable();
             $table->string('role')->nullable();
+            $table->string('saves')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

@@ -17,16 +17,34 @@ class MovieController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
-        $movies = Movie::paginate(10);
+        $movies = Movie::query();
+        $saves = explode(',',trim(Auth::user()->saves,','));
+        
+        if($request->has('search')){
+            $word = $request->get('search');
+            $genre = Genre::where('name','like',$word)->first();
+            if($genre != null){
+                // dd($genre->genre_id);
+                $movies = $movies->where('genre_id',$genre->genre_id);
+            }else{
+                $movies = $movies->where('title','like',"%".$word."%");
+            }
+        }                
+
+        $movies = $movies->paginate(10)->appends([
+            'search' => $request->get('search'),
+        ]);
         // $genres = Genre::all();
 
         // dd($movies[2]->genre);
+        // dd("jalan");
         return view('home')->with([
             'movies' => $movies,
             // 'genres' => $genres
+            'saves' => $saves,
         ]);
     }
 
@@ -194,5 +212,23 @@ class MovieController extends Controller
         $movie = Movie::find($id)->delete();
 
         return redirect()->route('manageMovies');
+    }
+
+    public function saveMovie($id){
+        $user = Auth::user();
+        $ids = "";
+        $saves = explode(',',trim($user->saves,','));
+        foreach ($saves as $i=>$save) {
+            # code...
+            if($i==0){
+                continue;
+            }
+            $ids = ",".$save.",";
+        }
+        $ids .= ",".$id.",";
+
+        $user->saves = $ids;
+        
+        return redirect()->route('home');
     }
 }

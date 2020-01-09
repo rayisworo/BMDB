@@ -42,7 +42,7 @@
                                     <a class="nav-link" href="/">Saved Movies</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="/">Inbox</a>
+                                    <a class="nav-link" href="{{route('inbox')}}">Inbox</a>
                                 </li>
                             @elseif (Auth::user()->role = 'admin')
                                 <li class="nav-item dropdown">

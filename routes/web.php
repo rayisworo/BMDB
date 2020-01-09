@@ -38,6 +38,7 @@ Route::get('/movie/edit/{id}','MovieController@edit')->name('editMovie');
 Route::post('/movie/update/{id}','MovieController@update')->name('updateMovie');
 Route::get('/movie/delete/{id}','MovieController@destroy')->name('deleteMovie');
 Route::get('/movie/{id}','MovieController@view')->name('viewMovie');
+Route::get('/movie/{id}/save','MovieController@saveMovie')->name('saveMovie');
 
 //comment
 Route::post('/comment/{id}','CommentController@store')->name('storeComment');
@@ -50,3 +51,9 @@ Route::post('/genre/store', 'GenreController@store')->name('storeGenre');
 Route::get('/genre/edit/{id}','GenreController@edit')->name('editGenre');
 Route::post('/genre/update/{id}','GenreController@update')->name('updateGenre'); 
 Route::get('/genre/delete/{id}','GenreController@destroy')->name('deleteGenre');
+
+//message
+Route::get('/message/{id}','MessageController@create')->name('createMessage');
+Route::post('/message/{id}/store','MessageController@store')->name('storeMessage');
+Route::get('/message','MessageController@index')->name('inbox');
+Route::get('/message/{id}/delete','MessageController@destroy')->name('deleteMessage');
