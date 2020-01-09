@@ -32,8 +32,7 @@
                                                         <button type="submit" class="btn btn-success btn-flat btn-edit">
                                                             Saved
                                                         </button>
-                                                    </form>                                       
-                                                {{-- @endif --}}
+                                                    </form> 
                                             </div>
                                         </div>
                                     </div>

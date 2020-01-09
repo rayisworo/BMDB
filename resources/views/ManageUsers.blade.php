@@ -14,7 +14,6 @@
                         Add User
                     </a>
                 </div>
-                <!-- /.card-header -->
                 <div class="card-body">
                 <table id="movieView" class="table table-bordered table-hover display nowrap">
                     <thead class="theadcolor">
@@ -56,11 +55,7 @@
                     </tbody>
                 </table>
                 </div>
-                <!-- /.card-body -->
-            {{-- </div> --}}
-            <!-- /.card -->
             </div>
-            <!-- /.col -->
         </div>
     </div>
   <div class="row justify-content-center">{{$users->links()}}</div>
