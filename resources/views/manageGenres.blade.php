@@ -40,11 +40,7 @@
                     </tbody>
                 </table>
                 </div>
-                <!-- /.card-body -->
-            {{-- </div> --}}
-            <!-- /.card -->
             </div>
-            <!-- /.col -->
         </div>
     </div>
   <div class="row justify-content-center">{{$genres->links()}}</div>

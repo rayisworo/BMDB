@@ -13,7 +13,7 @@ class GenreSeeder extends Seeder
     public function run()
     {
         //
-        for($i=0; $i<5; $i++){
+        for($i=0; $i<11; $i++){
             Genre::create([
                 'name'=>'genre '.$i,                
             ]);
